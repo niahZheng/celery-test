@@ -43,10 +43,13 @@ SAS_KEY = os.getenv('AZURE_SERVICE_BUS_KEY')
 NAMESPACE = os.getenv('AZURE_SERVICE_BUS_NAMESPACE')
 
 # 检查环境变量是否正确加载
-print("Azure Service Bus Configuration:")
-print(f"Policy Name: {SAS_POLICY_NAME}")
-print(f"Namespace: {NAMESPACE}")
-print(f"Key: {'*' * len(SAS_KEY) if SAS_KEY else 'Not Set'}")
+print("="*50)
+print("Checking Azure Service Bus Environment Variables:")
+print("="*50)
+print(f"AZURE_SERVICE_BUS_POLICY_NAME: {SAS_POLICY_NAME}")
+print(f"AZURE_SERVICE_BUS_NAMESPACE: {NAMESPACE}")
+print(f"AZURE_SERVICE_BUS_KEY: {'*' * len(SAS_KEY) if SAS_KEY else 'Not Set'}")
+print("="*50)
 
 if not all([SAS_POLICY_NAME, SAS_KEY, NAMESPACE]):
     print("ERROR: Missing required Azure Service Bus environment variables!")
@@ -55,6 +58,10 @@ if not all([SAS_POLICY_NAME, SAS_KEY, NAMESPACE]):
     if not SAS_KEY: missing_vars.append('AZURE_SERVICE_BUS_KEY')
     if not NAMESPACE: missing_vars.append('AZURE_SERVICE_BUS_NAMESPACE')
     print(f"ERROR: Missing variables: {', '.join(missing_vars)}")
+    print("="*50)
+
+# 强制刷新输出缓冲区
+sys.stdout.flush()
 
 # 创建 Celery 应用
 app = Celery('agent_assist_neo')
