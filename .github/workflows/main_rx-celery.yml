@@ -69,3 +69,4 @@ jobs:
           app-name: 'RX-celery'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3E61BBA6ECB946569C9CF98389AEA4C4 }}
+          startup-command: 'python swarmLauncher.py'
